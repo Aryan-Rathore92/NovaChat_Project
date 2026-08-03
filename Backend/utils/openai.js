@@ -12,7 +12,7 @@ const getOpenAPIResponse = async (message)=>{
             model: "openai/gpt-oss-20b",
             messages:[{
                 role: "user",
-                content: req.body.message
+                content: message
             }]
         })
     };

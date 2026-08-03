@@ -1,5 +1,6 @@
 import express from 'express';
 import Thread from '../models/Thread.js';
+import getOpenAPIResponse from '../utils/openai.js';
 
 const router = express.Router();
 
@@ -99,10 +100,21 @@ router.post('/chat', async (req,res)=>{
                 title: message,
                 messages: [{role: "user", content: message}]
             })
+        } else{
+            thread.messages.push({role: "user", content: message});
         }
+
+        const assistantReply = await getOpenAPIResponse(message);
+        thread.messages.push({role: "assistant", content: assistantReply});
+        thread.updatedAt = new Date();
+
+        await thread.save(); // everything save in DB
+        res.send({reply: assistantReply}); // send to the fronetnd
     } catch (error) {
         console.log(error);
-        
+        res.status(500).json({
+            error: "something went wrong!"
+        })
     }
 })
 
