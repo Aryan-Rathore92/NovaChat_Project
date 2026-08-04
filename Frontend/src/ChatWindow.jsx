@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState ,useEffect} from 'react'
 import './ChatWindow.css'
 import Chat from './Chat.jsx'
 import { MyContext } from './MyContext.jsx';
@@ -6,7 +6,7 @@ import {ScaleLoader} from 'react-spinners'
 
 function ChatWindow() {
 
-  const {prompt, reply, setPrompt, setReply, currThreadId} = useContext(MyContext);
+  const {prompt, reply, setPrompt, setReply, currThreadId,prevChats,setPrevChats} = useContext(MyContext);
   const [loading, setLoading] = useState(false);
       
   const getReply = async ()=>{
@@ -25,7 +25,6 @@ function ChatWindow() {
               try {
                 const response = await fetch("http://localhost:8080/api/chat", options);
                 const res = await response.json();
-                console.log(res);
                 setReply(res.reply);
               } catch (error) {
                 console.log(error);
@@ -33,6 +32,27 @@ function ChatWindow() {
               console.log("message:", prompt, "threadId:", currThreadId);
               setLoading(false);
   }
+
+  // Append new chat to prevChat
+   
+  useEffect(()=>{
+      if(prompt && reply){
+        setPrevChats(prevChats => (
+          [...prevChats, {
+            role:"user",
+            content: prompt
+          },
+          {
+            role:"assistant",
+            content: reply
+          }
+        ]
+        ))
+      }
+
+      setPrompt("");
+  },[reply])
+
   return (
     <div className='chatwindow'>
       <div className="navbar">
