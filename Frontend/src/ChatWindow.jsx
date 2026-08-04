@@ -29,7 +29,6 @@ function ChatWindow() {
               } catch (error) {
                 console.log(error);
               }
-              console.log("message:", prompt, "threadId:", currThreadId);
               setLoading(false);
   }
 
