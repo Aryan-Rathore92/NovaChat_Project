@@ -44,6 +44,24 @@ function Sidebar() {
       }
   }
 
+  const deleteThread = async (threadId)=>{
+     try {
+      const response = await fetch(`http://localhost:8080/api/thread/${threadId}`, {method: "DELETE"});
+      const res = await response.json();
+      console.log(res);
+
+      // updated thread re-render
+      setAllThreads(prev => prev.filter(thread => thread.threadId !== threadId));
+
+      if(threadId === currThreadId){
+        createNewChat(); // This use for remove the chat from chatWindow of deleted thread
+      }
+     }
+     catch(error) {
+      console.log(error)
+     }
+  }
+
   return (
     <section className='sidebar'>
       <button onClick={createNewChat}>
@@ -56,7 +74,12 @@ function Sidebar() {
             allThreads.map((thread,idx)=>(
               <li onClick={(e)=> changeThread(thread.threadId)} key={idx}>
                 {thread.title}
-                <i className="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash"
+                 onClick={(e)=>{
+                  e.stopPropagation(); // stop event bubling
+                  deleteThread(thread.threadId)
+                 }}
+                ></i>
               </li>
             ))
          }
