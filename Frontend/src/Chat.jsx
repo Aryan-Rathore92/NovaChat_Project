@@ -13,13 +13,18 @@ function Chat() {
        useEffect(()=>{
           // Latest Reply seprate ==> typing effect create
 
+          if(reply === null){
+            setLatestReply(null); //Load previous chat and  this is for stop the last reply coming through typing effect
+            return;
+          }
+
           if(!prevChats?.length) return;
 
           const content = reply.split(" "); // Here make a array of individual word
 
           let idx = 0;
           const interval = setInterval(()=>{
-                 setLatestReply(content.slice(0, idx+1).join(" "));
+                 setLatestReply(content.slice(0, idx+1).join(" ")); // This is typing effect
 
                  idx++;
                  if(idx >= content.length) clearInterval(interval);
@@ -42,12 +47,21 @@ function Chat() {
             </div>
           )
         }
-
+        
         {
-          prevChats.length > 0 && latestReply !== null &&
-          <div className="gptDiv" key={"typing"}>
-              <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{latestReply}</ReactMarkdown>
-          </div>
+          prevChats.length>0 && (
+            <>
+            {
+              latestReply === null?
+              (<div className="gptDiv" key={"non-typing"}>
+                  <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{prevChats[prevChats.length-1].content}</ReactMarkdown>
+              </div>) :
+              (<div className="gptDiv" key={"typing"}>
+                  <ReactMarkdown rehypePlugins={[rehypeHighlight]}>{latestReply}</ReactMarkdown>
+              </div>)
+            }
+            </>
+          )
         }
       </div>
     </>

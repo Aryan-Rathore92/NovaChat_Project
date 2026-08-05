@@ -6,11 +6,12 @@ import {ScaleLoader} from 'react-spinners'
 
 function ChatWindow() {
 
-  const {prompt, reply, setPrompt, setReply, currThreadId,prevChats,setPrevChats} = useContext(MyContext);
+  const {prompt, reply, setPrompt, setReply, currThreadId,prevChats,setPrevChats,setNewChat} = useContext(MyContext);
   const [loading, setLoading] = useState(false);
       
   const getReply = async ()=>{
             setLoading(true);
+            setNewChat(false); // for don't apper start new chat text
               const options = {
                 method: "POST",
                 headers: {

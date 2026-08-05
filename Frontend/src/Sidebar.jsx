@@ -13,7 +13,6 @@ function Sidebar() {
           const res = await response.json();
           const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}))
           setAllThreads(filteredData);
-          console.log(filteredData);
         } catch (error) {
           console.log(error);
         }
@@ -30,6 +29,21 @@ function Sidebar() {
     setCurrThreadId(uuidv1());
     setPrevChats([]);
   }
+
+  const changeThread = async (newThreadId)=>{
+      setCurrThreadId(newThreadId);
+
+      try {
+        const response = await fetch(`http://localhost:8080/api/thread/${newThreadId}`);
+        const res = await response.json();
+        setPrevChats(res);
+        setNewChat(false);
+        setReply(null);
+      } catch (error) {
+        console.log(error)
+      }
+  }
+
   return (
     <section className='sidebar'>
       <button onClick={createNewChat}>
@@ -40,7 +54,10 @@ function Sidebar() {
       <ul className="history">
          {
             allThreads.map((thread,idx)=>(
-              <li key={idx}>{thread.title}</li>
+              <li onClick={(e)=> changeThread(thread.threadId)} key={idx}>
+                {thread.title}
+                <i className="fa-solid fa-trash"></i>
+              </li>
             ))
          }
       </ul>
