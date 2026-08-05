@@ -13,9 +13,9 @@ function Chat() {
        useEffect(()=>{
           // Latest Reply seprate ==> typing effect create
 
-          if(prevChats?.length) return;
+          if(!prevChats?.length) return;
 
-          const content = reply.split(" "); // individual word
+          const content = reply.split(" "); // Here make a array of individual word
 
           let idx = 0;
           const interval = setInterval(()=>{

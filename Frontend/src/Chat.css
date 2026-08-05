@@ -20,6 +20,10 @@
       max-width: 500px;
       width: fit-content;
 }
-.gptMessage{
+.hljs{
+   border-radius: 10px !important;
+}
 
+pre{
+   white-space: pre-wrap;
 }
