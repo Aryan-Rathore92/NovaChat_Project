@@ -10,7 +10,7 @@ function Sidebar() {
 
   const getAllThreads = async ()=>{
         try {
-          const response = await fetch(`${API_URL}/api/thread`);
+          const response = await fetch(`${API_URL}/thread`);
           const res = await response.json();
           const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}))
           setAllThreads(filteredData);
@@ -35,7 +35,7 @@ function Sidebar() {
       setCurrThreadId(newThreadId);
 
       try {
-        const response = await fetch(`${API_URL}/api/thread/${newThreadId}`);
+        const response = await fetch(`${API_URL}/thread/${newThreadId}`);
         const res = await response.json();
         setPrevChats(res);
         setNewChat(false);
@@ -47,7 +47,7 @@ function Sidebar() {
 
   const deleteThread = async (threadId)=>{
      try {
-      const response = await fetch(`${API_URL}/api/thread/${threadId}`, {method: "DELETE"});
+      const response = await fetch(`${API_URL}/thread/${threadId}`, {method: "DELETE"});
       const res = await response.json();
       console.log(res);
 
