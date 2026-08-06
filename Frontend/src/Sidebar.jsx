@@ -1,7 +1,7 @@
 import React,{useContext, useEffect} from 'react'
 import {MyContext} from './MyContext'
 import './Sidebar.css'
-import logo from "../assets/gpt-logo.png";
+import logo from '../src/assets/gpt-logo.png'
 import {v1 as uuidv1} from 'uuid';
 import {API_URL} from './config.js'
 
