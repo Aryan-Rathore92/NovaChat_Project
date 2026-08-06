@@ -2,7 +2,8 @@ import React, { useContext, useState ,useEffect} from 'react'
 import './ChatWindow.css'
 import Chat from './Chat.jsx'
 import { MyContext } from './MyContext.jsx';
-import {ScaleLoader} from 'react-spinners'
+import {ScaleLoader} from 'react-spinners';
+import {API_URL} from './config.js'
 
 function ChatWindow() {
 
@@ -25,7 +26,7 @@ function ChatWindow() {
               };
 
               try {
-                const response = await fetch("http://localhost:8080/api/chat", options);
+                const response = await fetch(`${API_URL}/api/chat`, options);
                 const res = await response.json();
                 setReply(res.reply);
               } catch (error) {
