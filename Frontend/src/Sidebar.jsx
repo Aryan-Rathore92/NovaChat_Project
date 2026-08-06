@@ -1,6 +1,7 @@
 import React,{useContext, useEffect} from 'react'
 import {MyContext} from './MyContext'
 import './Sidebar.css'
+import logo from "../assets/gpt-logo.png";
 import {v1 as uuidv1} from 'uuid';
 import {API_URL} from './config.js'
 
@@ -66,7 +67,7 @@ function Sidebar() {
   return (
     <section className='sidebar'>
       <button onClick={createNewChat}>
-        <img src="src/assets/gpt-logo.png" alt="" className='logo'/>
+        <img src={logo} alt="" className='logo'/>
         <span><i className="fa-solid fa-pen-to-square"></i></span>
       </button>
 
