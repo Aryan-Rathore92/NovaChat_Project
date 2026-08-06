@@ -53,13 +53,14 @@ function ChatWindow() {
       setPrompt("");
   },[reply])
 
+
   return (
     <div className='chatwindow'>
       <div className="navbar">
          <span className='appname'>NovaChat &nbsp;<i className="fa-solid fa-chevron-down"></i></span>
-         <div className="userIconDiv">
-          <span className='userIcon'><i className="fa-solid fa-user"></i></span>
-         </div>
+            <div className="userIconDiv">
+                <span className='userIcon'><i className="fa-solid fa-user"></i></span>
+            </div>
       </div>
 
       <Chat/>
