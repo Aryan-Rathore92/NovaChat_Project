@@ -8,5 +8,8 @@
     "nodemon": "^3.1.14",
     "openai": "^7.3.0",
     "openapi": "^1.0.0"
-  }
+  },
+  "start":"node server.js",
+  "dev":"npx nodemon server.js",
+  "build": "npm install"
 }
