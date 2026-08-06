@@ -30,3 +30,28 @@
 pre{
    white-space: pre-wrap;
 }
+
+@media(max-width: 600px){
+   .chats{
+   max-width: 240px;;
+   overflow-y: scroll;
+   padding: 4rem;
+  }
+  .userDiv{
+   font-size: 0.6rem;
+   white-space: nowrap;
+   }
+   .gptDiv{
+   font-size: 0.7rem;
+  }
+  .userMessage{
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-left: 4rem;
+      max-width: 250px;
+      width: fit-content;
+   }
+   .hljs{
+   border-radius: 5px !important;
+   }
+}

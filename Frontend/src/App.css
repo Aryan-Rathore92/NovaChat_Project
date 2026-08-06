@@ -13,3 +13,10 @@ body {
     background-color: #212121;
     display: flex;
 }
+
+@media(max-width: 600px){
+    .app{
+        height: 100%;
+        width: 100vw;
+    }
+}
