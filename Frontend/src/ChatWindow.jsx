@@ -8,6 +8,7 @@ function ChatWindow() {
 
   const {prompt, reply, setPrompt, setReply, currThreadId,prevChats,setPrevChats,setNewChat} = useContext(MyContext);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
       
   const getReply = async ()=>{
             setLoading(true);
@@ -53,15 +54,28 @@ function ChatWindow() {
       setPrompt("");
   },[reply])
 
+  const handleProfileClick = ()=>{
+    setIsOpen(!isOpen);
+  }
+
 
   return (
     <div className='chatwindow'>
       <div className="navbar">
          <span className='appname'>NovaChat &nbsp;<i className="fa-solid fa-chevron-down"></i></span>
             <div className="userIconDiv">
-                <span className='userIcon'><i className="fa-solid fa-user"></i></span>
+                <span className='userIcon' onClick={handleProfileClick}><i className="fa-solid fa-user"></i></span>
             </div>
       </div>
+
+      {
+        isOpen && 
+        <div className="dropDown">
+          <div className="dropDownItem"><i class="fa-solid fa-gear"></i>Setting</div>
+          <div className="dropDownItem"><i class="fa-solid fa-cloud-arrow-up"></i>Upgrade Plan</div>
+          <div className="dropDownItem"><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</div>
+        </div>
+      }
 
       <Chat/>
       

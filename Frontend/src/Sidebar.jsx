@@ -72,7 +72,9 @@ function Sidebar() {
       <ul className="history">
          {
             allThreads.map((thread,idx)=>(
-              <li onClick={(e)=> changeThread(thread.threadId)} key={idx}>
+              <li onClick={(e)=> changeThread(thread.threadId)} key={idx}
+               className={thread.threadId === currThreadId ?"highlited":""}
+              >
                 {thread.title}
                 <i className="fa-solid fa-trash"
                  onClick={(e)=>{

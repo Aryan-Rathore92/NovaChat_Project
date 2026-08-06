@@ -76,6 +76,11 @@ button span{
     color: #f87171 !important;
 }
 
+.highlited{
+    background-color: rgba(180,180,180,0.05);
+    border-radius: 10px;
+}
+
 @media(max-width: 600px){
     .sidebar{
     height: 100vh;
